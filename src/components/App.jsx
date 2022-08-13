@@ -1,16 +1,29 @@
+import { useSelector } from 'react-redux';
+import Form from './form/form';
+import FormPhonebook from './formPhonebook/formPhonebook';
+import Filter from './filter/filter';
+import dispatch from './form/form';
+import styles from './form/form.module.css';
+
 export const App = () => {
+  const contacts = useSelector(state => state.contacts.items);
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div className={styles.box}>
+      <div className={styles.boxPhone}>
+        <h1 className={styles.titlePhone}>Phonebook</h1>        
+        <Form
+          contacts={contacts} dispatch={dispatch}
+        />
+      </div>
+      <div className={styles.contacts}>
+        <h2 className={styles.titleContact}>Contacts</h2>
+        <h2 className={styles.titleFind}>Find contacts by name</h2>
+        <Filter />
+      </div>
+      <div className={styles.contacts}>       
+        <FormPhonebook />
+      </div>
     </div>
   );
 };
